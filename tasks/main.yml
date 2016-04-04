@@ -1,0 +1,5 @@
+---
+# tasks file for ansible-mapr_posixclient
+
+- name: install mapr-posix-client-basic
+  yum: name=mapr-posix-client-basic state=present

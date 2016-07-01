@@ -2,13 +2,16 @@
 # tasks file for ansible-mapr_posixclient
 
 - name: install mapr-posix-client
-  sudo_user: root
+  become: yes
+  become_user: root
   yum: name=mapr-posix-client-{{posix_client_edition|default("basic")}} state=present
 
 - name: create posix client mount point
-  sudo_user: root
+  become: yes
+  become_user: root
   file: state=directory path=/mapr owner=root
 
 - name: set ticketfile location if secure cluster
-  sudo_user: root
+  become: yes
+  become_user: root
   lineinfile: dest=/opt/mapr/conf/fuse.conf regexp=^fuse.ticketfile.location line=fuse.ticketfile.location={{posix_ticketfile|default("/opt/mapr/conf/mapruserticket")}} backup=yes
